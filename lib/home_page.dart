@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart'; // new
 
+import 'location_page.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
 
@@ -53,19 +55,21 @@ class _MyHomePageState extends State<HomePage> {
         title: Text(widget.title),
       ),
       body: <Widget>[
+        LocationPage(),
+
         /// Home page
-        Card(
-          shadowColor: Colors.transparent,
-          margin: const EdgeInsets.all(8.0),
-          child: SizedBox.expand(
-            child: Center(
-              child: Text(
-                'Home page',
-                style: theme.textTheme.titleLarge,
-              ),
-            ),
-          ),
-        ),
+        // Card(
+        //   shadowColor: Colors.transparent,
+        //   margin: const EdgeInsets.all(8.0),
+        //   child: SizedBox.expand(
+        //     child: Center(
+        //       child: Text(
+        //         'Home page',
+        //         style: theme.textTheme.titleLarge,
+        //       ),
+        //     ),
+        //   ),
+        // ),
 
         /// Notifications page
         const Padding(
@@ -80,6 +84,8 @@ class _MyHomePageState extends State<HomePage> {
                 ),
               ),
               Card(
+                shadowColor: Colors.transparent,
+                margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                   leading: Icon(Icons.notifications_sharp),
                   title: Text('Notification 2'),

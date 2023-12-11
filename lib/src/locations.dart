@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
@@ -97,4 +98,13 @@ Future<Locations> getGoogleOffices() async {
       await rootBundle.loadString('assets/locations.json'),
     ),
   );
+}
+
+double calcDistance(double lon1, double lat1, double lon2, double lat2) {
+  double x1 = lon1 / 180 * pi;
+  double y1 = lat1 / 180 * pi;
+  double x2 = lon2 / 180 * pi;
+  double y2 = lat2 / 180 * pi;
+  return 6378.137 *
+      acos((sin(y1) * sin(y2)) + (cos(y1) * cos(y2) * cos(x2 - x1)));
 }
