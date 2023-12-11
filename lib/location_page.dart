@@ -14,7 +14,7 @@ class LocationPage extends StatefulWidget {
 
 class _LocationPageState extends State<LocationPage> {
   final Map<String, Marker> _markers = {};
-  // late GoogleMapController mapController;
+  // 初期位置
   late LatLng _center = const LatLng(35.0262, 135.7808);
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
@@ -22,15 +22,19 @@ class _LocationPageState extends State<LocationPage> {
     setState(() {
       _markers.clear();
       for (final office in googleOffices.offices) {
-        final marker = Marker(
-          markerId: MarkerId(office.name),
-          position: LatLng(office.lat, office.lng),
-          infoWindow: InfoWindow(
-            title: office.name,
-            snippet: office.address,
-          ),
-        );
-        _markers[office.name] = marker;
+        double distance = locations.calcDistance(
+            office.lat, office.lng, _center.latitude, _center.longitude);
+        if (distance < 1000) {
+          final marker = Marker(
+            markerId: MarkerId(office.name),
+            position: LatLng(office.lat, office.lng),
+            infoWindow: InfoWindow(
+              title: office.name,
+              snippet: office.address,
+            ),
+          );
+          _markers[office.name] = marker;
+        }
       }
     });
   }
@@ -57,7 +61,7 @@ class _LocationPageState extends State<LocationPage> {
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
           target: _center,
-          zoom: 10,
+          zoom: 4,
         ),
         markers: _markers.values.toSet(),
         myLocationEnabled: true,

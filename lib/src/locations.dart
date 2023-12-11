@@ -100,10 +100,11 @@ Future<Locations> getGoogleOffices() async {
   );
 }
 
-double calcDistance(double lon1, double lat1, double lon2, double lat2) {
-  double x1 = lon1 / 180 * pi;
+// 緯度経度から距離を計算
+double calcDistance(double lat1, double lng1, double lat2, double lng2) {
+  double x1 = lng1 / 180 * pi;
   double y1 = lat1 / 180 * pi;
-  double x2 = lon2 / 180 * pi;
+  double x2 = lng2 / 180 * pi;
   double y2 = lat2 / 180 * pi;
   return 6378.137 *
       acos((sin(y1) * sin(y2)) + (cos(y1) * cos(y2) * cos(x2 - x1)));
