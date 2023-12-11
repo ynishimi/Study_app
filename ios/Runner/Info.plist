@@ -45,5 +45,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<!-- geolocator Section -->
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>チェックイン時に位置情報を確認するために必要です。</string>
+    <!-- <key>NSLocationAlwaysUsageDescription</key>
+    <string>Required to post location information when posting photos and videos.</string> -->
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>計測中にその場を離れたことを確認するために必要です。</string>
+    <!-- End of the geolocator Section -->
 </dict>
 </plist>
