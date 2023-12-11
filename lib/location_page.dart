@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'src/locations.dart' as locations;
 
-import 'home_page.dart';
 import 'position.dart';
 
 class LocationPage extends StatefulWidget {
@@ -55,17 +54,16 @@ class _LocationPageState extends State<LocationPage> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
-    return Card(
-      child: GoogleMap(
-        onMapCreated: _onMapCreated,
-        initialCameraPosition: CameraPosition(
-          target: _center,
-          zoom: 4,
-        ),
-        markers: _markers.values.toSet(),
-        myLocationEnabled: true,
+    return GoogleMap(
+      onMapCreated: _onMapCreated,
+      initialCameraPosition: CameraPosition(
+        target: _center,
+        zoom: 4,
       ),
+      markers: _markers.values.toSet(),
+      myLocationEnabled: true,
     );
   }
 }

@@ -17,6 +17,7 @@ class StudyApp extends StatefulWidget {
 }
 
 class _StudyAppState extends State<StudyApp> {
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Hakka',
@@ -24,7 +25,7 @@ class _StudyAppState extends State<StudyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
-      home: HomePage(title: 'Hakka'),
+      home: const HomePage(title: 'Hakka'),
     );
   }
 }

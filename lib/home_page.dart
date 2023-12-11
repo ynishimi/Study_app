@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart'; // new
-
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'location_page.dart';
+import 'place_list_page.dart';
+import 'src/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -21,20 +23,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomePage> {
-  // int _counter = 0;
   int currentPageIndex = 0;
-
-  // void _incrementCounter() {
-  //   setState(() {
-  //     // This call to setState tells the Flutter framework that something has
-  //     // changed in this State, which causes it to rerun the build method below
-  //     // so that the display can reflect the updated values. If we changed
-  //     // _counter without calling setState(), then the build method would not be
-  //     // called again, and so nothing would appear to happen.
-  //     _counter++;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -52,12 +41,21 @@ class _MyHomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: GoogleFonts.dotGothic16(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
       ),
       body: <Widget>[
-        LocationPage(),
+        const LocationPage(),
 
-        /// Home page
+        const PlaceList(),
+
+        // Home page
         // Card(
         //   shadowColor: Colors.transparent,
         //   margin: const EdgeInsets.all(8.0),
@@ -70,31 +68,6 @@ class _MyHomePageState extends State<HomePage> {
         //     ),
         //   ),
         // ),
-
-        /// Notifications page
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Column(
-            children: <Widget>[
-              Card(
-                child: ListTile(
-                  leading: Icon(Icons.notifications_sharp),
-                  title: Text('Notification 1'),
-                  subtitle: Text('This is a notification'),
-                ),
-              ),
-              Card(
-                shadowColor: Colors.transparent,
-                margin: const EdgeInsets.all(8.0),
-                child: ListTile(
-                  leading: Icon(Icons.notifications_sharp),
-                  title: Text('Notification 2'),
-                  subtitle: Text('This is a notification'),
-                ),
-              ),
-            ],
-          ),
-        ),
 
         /// Messages page
         ListView.builder(
@@ -187,8 +160,8 @@ class _MyHomePageState extends State<HomePage> {
             label: 'Home',
           ),
           NavigationDestination(
-            icon: Icon(Icons.text_snippet),
-            label: 'test',
+            icon: Icon(Icons.place),
+            label: 'Places',
           ),
           NavigationDestination(
             icon: Icon(Icons.text_snippet),
