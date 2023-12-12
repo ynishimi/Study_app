@@ -15,8 +15,16 @@ class _PlaceListState extends State<PlaceList> {
       padding: EdgeInsets.all(8.0),
       child: Column(
         children: <Widget>[
-          Location(Icons.place, '附属図書館', 'うー'),
-          Location(Icons.place, '自習室24', 'ウー'),
+          Location(
+            Icons.place,
+            '附属図書館',
+            'うー',
+          ),
+          Location(
+            Icons.place,
+            '自習室24',
+            'ウー',
+          ),
         ],
       ),
     );

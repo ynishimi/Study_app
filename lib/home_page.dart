@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'location_page.dart';
 import 'place_list_page.dart';
-import 'src/widgets.dart';
+import 'profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -26,7 +26,6 @@ class _MyHomePageState extends State<HomePage> {
   int currentPageIndex = 0;
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -35,9 +34,6 @@ class _MyHomePageState extends State<HomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
@@ -46,70 +42,14 @@ class _MyHomePageState extends State<HomePage> {
           style: GoogleFonts.dotGothic16(
             fontSize: 30,
             fontWeight: FontWeight.bold,
-            fontStyle: FontStyle.italic,
+            // fontStyle: FontStyle.italic,
           ),
         ),
       ),
       body: <Widget>[
         const LocationPage(),
-
         const PlaceList(),
-
-        // Home page
-        // Card(
-        //   shadowColor: Colors.transparent,
-        //   margin: const EdgeInsets.all(8.0),
-        //   child: SizedBox.expand(
-        //     child: Center(
-        //       child: Text(
-        //         'Home page',
-        //         style: theme.textTheme.titleLarge,
-        //       ),
-        //     ),
-        //   ),
-        // ),
-
-        /// Messages page
-        ListView.builder(
-          reverse: true,
-          itemCount: 2,
-          itemBuilder: (BuildContext context, int index) {
-            if (index == 0) {
-              return Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  margin: const EdgeInsets.all(8.0),
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.primary,
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Text(
-                    'Hello',
-                    style: theme.textTheme.bodyLarge!
-                        .copyWith(color: theme.colorScheme.onPrimary),
-                  ),
-                ),
-              );
-            }
-            return Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                margin: const EdgeInsets.all(8.0),
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.primary,
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: Text(
-                  'Hi!',
-                  style: theme.textTheme.bodyLarge!
-                      .copyWith(color: theme.colorScheme.onPrimary),
-                ),
-              ),
-            );
-          },
-        ),
+        const Profile(),
       ][currentPageIndex],
 
       // body: Center(
@@ -164,7 +104,7 @@ class _MyHomePageState extends State<HomePage> {
             label: 'Places',
           ),
           NavigationDestination(
-            icon: Icon(Icons.text_snippet),
+            icon: Icon(Icons.person),
             label: 'test',
           ),
         ],
