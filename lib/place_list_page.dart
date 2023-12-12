@@ -16,14 +16,14 @@ class _PlaceListState extends State<PlaceList> {
       child: Column(
         children: <Widget>[
           Location(
-            Icons.place,
+            Icons.place_rounded,
             '附属図書館',
-            'うー',
+            'チェックイン可能',
           ),
           Location(
-            Icons.place,
+            Icons.place_outlined,
             '自習室24',
-            'ウー',
+            '1.2km',
           ),
         ],
       ),

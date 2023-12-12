@@ -47,7 +47,20 @@ class _MyHomePageState extends State<HomePage> {
         ),
       ),
       body: <Widget>[
-        const LocationPage(),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Center(
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
+              ),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: LocationPage(),
+              ),
+            ),
+          ),
+        ),
         const PlaceList(),
         const Profile(),
       ][currentPageIndex],
