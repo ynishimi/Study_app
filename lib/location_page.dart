@@ -64,6 +64,7 @@ class _LocationPageState extends State<LocationPage> {
       ),
       markers: _markers.values.toSet(),
       myLocationEnabled: true,
+      myLocationButtonEnabled: true,
     );
   }
 }
