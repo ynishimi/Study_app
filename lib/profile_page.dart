@@ -17,10 +17,22 @@ class _ProfileState extends State<Profile> {
       padding: EdgeInsets.all(8.0),
       child: Column(
         children: <Widget>[
-          ProfileCard(
-            Icons.person,
+          const ProfileCard(
+            Icons.person_rounded,
             'nishimi',
           ),
+          const Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                ViewChoice(),
+                Spacer(),
+              ],
+            ),
+          ),
+          Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: HistoryCard(123, 1, 12)),
           // firestoreのテスト
           ElevatedButton(
             child: Text('ウー'),
@@ -29,7 +41,13 @@ class _ProfileState extends State<Profile> {
               await FirebaseFirestore.instance
                   .collection('users') // コレクションID
                   .doc('nishimi') // ドキュメントID
-                  .set({'time': 'now', 'comment': 'ウー'}); // データ
+                  .set({
+                'timestamp': DateTime.now().millisecondsSinceEpoch,
+                // 場所
+                'placeID': 1,
+                // 滞在時間
+                'duration': 25,
+              }); // データ
             },
           ),
         ],

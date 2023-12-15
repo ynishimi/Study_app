@@ -23,7 +23,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomePage> {
-  int currentPageIndex = 0;
+  int currentPageIndex = 1;
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -109,16 +109,16 @@ class _MyHomePageState extends State<HomePage> {
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[
           NavigationDestination(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.map_rounded),
+            label: 'Map',
           ),
           NavigationDestination(
-            icon: Icon(Icons.place),
+            icon: Icon(Icons.place_rounded),
             label: 'Places',
           ),
           NavigationDestination(
-            icon: Icon(Icons.person),
-            label: 'test',
+            icon: Icon(Icons.person_rounded),
+            label: 'Profile',
           ),
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
