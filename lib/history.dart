@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ffi';
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -36,7 +37,12 @@ class _HistoryState extends State<History> {
         children: [
           const SizedBox(height: 8),
           for (var eachHistory in widget.histories)
-            Text('${eachHistory.placeId}: ${eachHistory.duration}'),
+            // Text('${eachHistory.placeId}: ${eachHistory.duration}'),
+            HistoryCard(
+              eachHistory.timestamp,
+              eachHistory.placeId,
+              eachHistory.duration,
+            ),
           const SizedBox(height: 8),
           ElevatedButton(
             child: Text('ウー'),
@@ -53,8 +59,9 @@ class _HistoryState extends State<History> {
 
 // 履歴の取得
 class EachHistory {
-  EachHistory({required this.placeId, required this.duration});
-
-  final String placeId;
-  final String duration;
+  EachHistory(
+      {required this.timestamp, required this.placeId, required this.duration});
+  final Timestamp timestamp;
+  final int placeId;
+  final int duration;
 }

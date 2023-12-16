@@ -42,8 +42,9 @@ class ApplicationState extends ChangeNotifier {
           for (final document in snapshot.docs) {
             _histories.add(
               EachHistory(
-                  placeId: document.data()['placeId'].toString(),
-                  duration: document.data()['duration'].toString()),
+                  timestamp: document.data()['timestamp'],
+                  placeId: document.data()['placeId'],
+                  duration: document.data()['duration']),
             );
           }
           notifyListeners();
@@ -66,7 +67,8 @@ class ApplicationState extends ChangeNotifier {
     return FirebaseFirestore.instance
         .collection('history')
         .add(<String, dynamic>{
-      'timestamp': DateTime.now().millisecondsSinceEpoch,
+      // 'timestamp': DateTime.now().millisecondsSinceEpoch,
+      'timestamp': DateTime.now(),
       'placeId': placeId,
       'duration': duration,
       'userId': FirebaseAuth.instance.currentUser!.uid,

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -47,7 +48,7 @@ class ProfileCard extends StatelessWidget {
 // 滞在履歴のカード
 class HistoryCard extends StatelessWidget {
   const HistoryCard(this.timestamp, this.placeID, this.duration, {super.key});
-  final int timestamp;
+  final Timestamp timestamp;
   final int placeID;
   final int duration;
 
@@ -55,7 +56,13 @@ class HistoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        leading: const Icon(Icons.timeline_rounded),
+        leading: Text(
+          '${duration.toString()} min',
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 10,
+          ),
+        ),
         title: Text(
           placeID.toString(),
           style: const TextStyle(
@@ -63,10 +70,7 @@ class HistoryCard extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          '${duration.toString()} 分',
-        ),
-        trailing: Text(
-          '${DateTime.fromMillisecondsSinceEpoch(timestamp * 1000)}',
+          '${timestamp.toDate()}',
         ),
       ),
     );
