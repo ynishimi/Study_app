@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:study_app/history.dart';
 
 import 'src/widgets.dart';
 import 'src/authentication.dart';
@@ -19,7 +20,6 @@ import 'home_page.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
-
   @override
   _ProfileState createState() => _ProfileState();
 }
@@ -49,7 +49,7 @@ class _ProfileState extends State<Profile> {
             child: Row(
               children: [
                 ViewChoice(),
-                Spacer(),
+                // Spacer(),
               ],
             ),
           ),
@@ -57,23 +57,21 @@ class _ProfileState extends State<Profile> {
             padding: const EdgeInsets.all(8.0),
             // child: HistoryCard(123, 1, 12),
           ),
-          // firestoreのテスト
-          ElevatedButton(
-            child: Text('ウー'),
-            onPressed: () async {
-              print('ウー');
-              await FirebaseFirestore.instance
-                  .collection('users') // コレクションID
-                  .doc('nishimi') // ドキュメントID
-                  .set({
-                'timestamp': DateTime.now().millisecondsSinceEpoch,
-                // 場所
-                'placeID': 1,
-                // 滞在時間
-                'duration': 25,
-              }); // データ
-            },
+          // エントリを追加するコード
+          Consumer<ApplicationState>(
+            builder: (context, appState, _) => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (appState.loggedIn) ...[
+                  History(
+                    addHistory: (placeId, duration) =>
+                        appState.addHistoryToFirestore(placeId, duration),
+                  ),
+                ],
+              ],
+            ),
           ),
+          // History(addHistory: (history) => print(history)),
         ],
       ),
     );
