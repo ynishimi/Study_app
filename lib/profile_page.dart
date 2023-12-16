@@ -66,6 +66,7 @@ class _ProfileState extends State<Profile> {
                   History(
                     addHistory: (placeId, duration) =>
                         appState.addHistoryToFirestore(placeId, duration),
+                    histories: appState.histories,
                   ),
                 ],
               ],

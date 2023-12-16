@@ -4,8 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart'
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:async';
 import '../firebase_options.dart';
+import '../history.dart';
 
 //providerパッケージ(下位ツリーのWidgetから上位ツリーのWidgetが管理する状態にアクセスする手段を提供?)
 class ApplicationState extends ChangeNotifier {
@@ -15,6 +16,11 @@ class ApplicationState extends ChangeNotifier {
 
   bool _loggedIn = false;
   bool get loggedIn => _loggedIn;
+
+  // 履歴を表示するため?
+  StreamSubscription<QuerySnapshot>? _historySubscription;
+  List<EachHistory> _histories = [];
+  List<EachHistory> get histories => _histories;
 
   Future<void> init() async {
     await Firebase.initializeApp(
@@ -27,8 +33,25 @@ class ApplicationState extends ChangeNotifier {
     FirebaseAuth.instance.userChanges().listen((user) {
       if (user != null) {
         _loggedIn = true;
+        _historySubscription = FirebaseFirestore.instance
+            .collection('history')
+            .orderBy('timestamp', descending: true)
+            .snapshots()
+            .listen((snapshot) {
+          _histories = [];
+          for (final document in snapshot.docs) {
+            _histories.add(
+              EachHistory(
+                  placeId: document.data()['placeId'].toString(),
+                  duration: document.data()['duration'].toString()),
+            );
+          }
+          notifyListeners();
+        });
       } else {
         _loggedIn = false;
+        _histories = [];
+        _historySubscription?.cancel();
       }
       notifyListeners();
     });
