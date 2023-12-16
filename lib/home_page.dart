@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'location_page.dart';
 import 'place_list_page.dart';
@@ -105,6 +106,7 @@ class _MyHomePageState extends State<HomePage> {
           setState(() {
             currentPageIndex = index;
           });
+          HapticFeedback.lightImpact();
         },
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[

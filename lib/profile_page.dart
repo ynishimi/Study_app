@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 import 'src/widgets.dart';
+import 'src/authentication.dart';
+import 'package:firebase_auth/firebase_auth.dart' // new
+    hide
+        EmailAuthProvider,
+        PhoneAuthProvider;
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+
+// import 'package:go_router/go_router.dart'; // new
+
+import 'package:provider/provider.dart';
+
+import 'src/app_state.dart';
+import 'home_page.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -21,6 +35,15 @@ class _ProfileState extends State<Profile> {
             Icons.person_rounded,
             'nishimi',
           ),
+
+          // Login機能テスト
+          Consumer<ApplicationState>(
+            builder: (context, appState, _) => AuthFunc(
+                loggedIn: appState.loggedIn,
+                signOut: () {
+                  FirebaseAuth.instance.signOut();
+                }),
+          ),
           const Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -31,8 +54,9 @@ class _ProfileState extends State<Profile> {
             ),
           ),
           Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: HistoryCard(123, 1, 12)),
+            padding: const EdgeInsets.all(8.0),
+            // child: HistoryCard(123, 1, 12),
+          ),
           // firestoreのテスト
           ElevatedButton(
             child: Text('ウー'),

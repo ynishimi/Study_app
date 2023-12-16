@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Location extends StatelessWidget {
   const Location(this.icon, this.title, this.subtitle, {super.key});
@@ -101,11 +102,9 @@ class _ViewChoiceState extends State<ViewChoice> {
       selected: <View>{view},
       onSelectionChanged: (Set<View> newSelection) {
         setState(() {
-          // By default there is only a single segment that can be
-          // selected at one time, so its value is always the first
-          // item in the selected set.
           view = newSelection.first;
         });
+        HapticFeedback.selectionClick();
       },
     );
   }
